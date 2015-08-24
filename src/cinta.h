@@ -53,6 +53,8 @@ double _sigma;
 
 
 
+
+
 public:
 	cinta(const char *n): Simulator(n) {};
 	void init(double, ...);

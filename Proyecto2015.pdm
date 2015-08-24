@@ -48,7 +48,7 @@ Coupled
             Name = Sistema de Control
             Ports = 3 ; 3
             Path = src/sistemacontrol.h
-            Description = Sistema de Control\n\nParametros:\n\nmesa1 = Puerto de la Mesa 1.\n\nmesa2 = Puerto de la Mesa 2.\n\nl = Longitud de la Cinta.\n\ndeltal = Longitud de los objetos de que viajan en la cinta.\n\nvc = Velocidad a la cual se mueve la cinta.
+            Description = Sistema de Control\n\nParametros:\n\npuerto_mesa1 = Puerto de la Mesa 1.\n\npuerto_mesa2 = Puerto de la Mesa 2.\n\npuerto_cinta = Puerto de la Cinta.\n\nl = Longitud de la Cinta.\n\ndeltal = Longitud de los objetos de que viajan en la cinta.\n\nvc = Velocidad a la cual se mueve la cinta.
             Graphic
                 {
                 Position = -5430 ; -5730
@@ -59,11 +59,12 @@ Coupled
                 }
             Parameters
                 {
-                l = Val; 2 ; Longitud de la Cinta.
-                deltal = Val; 0.5 ; Longitud de los objetos de que viajan en la cinta.
-                vc = Val; 9 ; Velocidad a la cual se mueve la cinta.
-                mesa1 = Val; 1 ; Puerto de la Mesa 1.
-                mesa2 = Val; 2 ; Puerto de la Mesa 2.
+                l = Val; 2 ; Puerto de la Mesa 1.
+                deltal = Val; 0.5 ; Puerto de la Mesa 1.
+                vc = Val; 9 ; Puerto de la Mesa 1.
+                puerto_mesa1 = Val; 1 ; Puerto de la Mesa 1.
+                puerto_mesa2 = Val; 2 ; Puerto de la Mesa 2.
+                puerto_cinta = Val; 0 ; Puerto de la Cinta.
                 }
             }
         Atomic
@@ -151,7 +152,7 @@ Coupled
             Parameters
                 {
                 Inputs = Str; %Inputs ; Number of inputs
-                Format = Str; set xrange [0:%tf] @ set grid @ set title 'Piezas Rechazadas' @ set yrange [0:100] ; General Formatting (use @ as line break)
+                Format = Str; set xrange [0:%tf] @ set grid @ set title 'Piezas Rechazadas' ; General Formatting (use @ as line break)
                 Format1 = Str; with lines title 'Porcentaje de Piezas Rechazadas' ; Formatting options for input 1
                 Format2 = Str;  ; Formatting options for input 2
                 Format3 = Str;  ; Formatting options for input 3

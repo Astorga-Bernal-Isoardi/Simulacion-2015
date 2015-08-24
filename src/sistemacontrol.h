@@ -9,16 +9,29 @@
 #include "limits"
 #include "string"
 #include "cfloat"
+#include "mesa.cpp"
+#include "salida.cpp"
 
 
 class sistemacontrol: public Simulator { 
 // Declare the state,
+
+Mesa mesa1;
+
+Mesa mesa2;
+
+//True = Corriendo | False = Detenida //
+bool corre_cinta; 
+
 double sigma;
+
 // output variables
 
-std::string salida; 
+Salida salida;
 
-double y;
+std::string y;
+
+int x;
 
 // and parameters
 
@@ -27,6 +40,16 @@ double l;
 double deltal;
 
 double vc;
+
+int puerto_mesa1;
+
+int puerto_mesa2;
+
+int puerto_cinta;
+
+
+
+
 
 public:
 	sistemacontrol(const char *n): Simulator(n) {};

@@ -8,7 +8,7 @@ Root-Coordinator
   Simulator
    {
     Path = src/sistemacontrol.h
-    Parameters = 2.000000e+00,5.000000e-01,9.000000e+00,1.000000e+00,2.000000e+00
+    Parameters = 2.000000e+00,5.000000e-01,9.000000e+00,1.000000e+00,2.000000e+00,0.000000e+00
    }
   Simulator
    {
@@ -23,12 +23,12 @@ Root-Coordinator
   Simulator
    {
     Path = src/generador.h
-    Parameters = 1.000000e+01,2.000000e+00,5.000000e-01,9.000000e+00
+    Parameters = 2.000000e+01,2.000000e+00,5.000000e-01,9.000000e+00
    }
   Simulator
    {
     Path = sinks/gnuplot.h
-    Parameters = 1.000000e+00,"set xrange [0:%tf] @ set grid @ set title 'Piezas Rechazadas' @ set yrange [0:100]","with lines title 'Porcentaje de Piezas Rechazadas'","","","",""
+    Parameters = 1.000000e+00,"set xrange [0:%tf] @ set grid @ set title 'Piezas Rechazadas'","with lines title 'Porcentaje de Piezas Rechazadas'","","","",""
    }
   Simulator
    {

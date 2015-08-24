@@ -14,7 +14,7 @@ deltal = va_arg(parameters, double);
 vc = va_arg(parameters, double);
 
 //Inicilizar Variables del Estado
-corre_cinta = false;//Cinta corriendo
+corre_cinta = true;//Cinta corriendo
 numero_piezas_rechazadas = 0;
 sigma = DBL_MAX;
 numero_piezas_totales = 0;
@@ -125,8 +125,7 @@ std::list<double>::iterator i = lista_distancias.begin();
 if( salida_plot_rechazadas || salida_plot_piezas ){
 	if( salida_plot_rechazadas ){
 		//Salida al plot de numero de piezas rechazada.	
-		//y = (numero_piezas_rechazadas/numero_piezas_totales) * 100;
-		y = numero_piezas_rechazadas;
+		y = (numero_piezas_rechazadas/numero_piezas_totales) * 100;
 		return Event(&y,1);	
 	}else{
 		//Salida al plot de numero de piezas en cinta
