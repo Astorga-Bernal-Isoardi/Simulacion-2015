@@ -7,19 +7,22 @@ va_start(parameters,t);
 //where:
 // %Name% is the parameter name
 //	%Type% is the parameter type
-srand(time(0));
 
-_lambda = va_arg(parameters, double);
-_l = va_arg(parameters, double);
-_deltal = va_arg(parameters, double);
-_vc = va_arg(parameters, double);
+//Obtener Parametros
+lambda_distribucion = va_arg(parameters, double);
+l = va_arg(parameters, double);
+deltal = va_arg(parameters, double);
+vc = va_arg(parameters, double);
 
+//Inicilizar Variables del Estado
+srand(time(NULL));
 do{
 	u = (rand()/(double) (RAND_MAX + 1));
-	s = -log(u)/_lambda;
-} while (s < (_deltal / _vc));
-
+	s = -(1/lambda_distribucion) * log(u); //Wikipedia
+} while (s < (deltal / vc));
 sigma = s;
+
+//Inicializar Variables de Salida
 y = "ARRIVE";
 }
 double generador::ta(double t) {
@@ -29,8 +32,8 @@ return sigma;
 void generador::dint(double t) {
 do{
 	u = (rand()/(double) (RAND_MAX + 1));
-	s = -log(u)/_lambda;
-} while (s < (_deltal / _vc));
+	s = -log(u)/lambda_distribucion;
+} while (s < (deltal / vc));
 
 sigma = s;
 }

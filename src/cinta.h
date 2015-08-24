@@ -14,13 +14,16 @@
 
 class cinta: public Simulator { 
 // Declare the state,
+
 std::list<double> lista_distancias;
 
-enum Estado_Cinta {CORRIENDO , DETENIDA};
-
-Estado_Cinta _estado_cinta;
+bool corre_cinta; //True = Corriendo | False = Detenida //
 
 double numero_piezas_rechazadas;
+
+double sigma;
+
+double numero_piezas_totales;
 
 // output variables
 
@@ -29,7 +32,6 @@ std::string salida;
 double y;
 
 // and parameters
-double sigma;
 
 double l;
 
@@ -37,11 +39,18 @@ double deltal;
 
 double vc;
 
-//std::numeric_limits<double>::max();
+//Aux
 
-double INFINITO;
+bool salida_plot_rechazadas;
 
+bool salida_plot_piezas;
+ 
 double _sigma;
+
+
+
+
+
 
 
 public:

@@ -30,7 +30,7 @@ Coupled
             Description = Cinta transportadora\n\nParametros:\n\nl = Longitud de la Cinta.\n\ndeltal = Longitud de los objetos de que viajan en la cinta.\n\nvc = Velocidad a la cual se mueve la cinta.
             Graphic
                 {
-                Position = -9930 ; -5730
+                Position = -10005 ; -5730
                 Dimension = 1125 ; 1125
                 Direction = Right
                 Color = 15
@@ -128,7 +128,7 @@ Coupled
                 }
             Parameters
                 {
-                lambda = Val; 0.1 ; Parametro para la distribucion del generador
+                lambda_distribucion = Val; 20 ; Parametro para la distribucion del generador
                 l = Val; 2 ; Longitud de la Cinta
                 deltal = Val; 0.5 ; Longitud de los objetos de que viajan en la cinta
                 vc = Val; 9 ; Velocidad a la cual se mueve la cinta
@@ -151,8 +151,8 @@ Coupled
             Parameters
                 {
                 Inputs = Str; %Inputs ; Number of inputs
-                Format = Str; set xrange [0:%tf] @ set grid @ set title 'Plot' ; General Formatting (use @ as line break)
-                Format1 = Str; with lines title 'First output' ; Formatting options for input 1
+                Format = Str; set xrange [0:%tf] @ set grid @ set title 'Piezas Rechazadas' @ set yrange [0:100] ; General Formatting (use @ as line break)
+                Format1 = Str; with lines title 'Porcentaje de Piezas Rechazadas' ; Formatting options for input 1
                 Format2 = Str;  ; Formatting options for input 2
                 Format3 = Str;  ; Formatting options for input 3
                 Format4 = Str;  ; Formatting options for input 4
@@ -167,7 +167,7 @@ Coupled
             Description = Plot input signal using GnuPlot
             Graphic
                 {
-                Position = -7905 ; -3255
+                Position = -7830 ; -3255
                 Dimension = 1125 ; 1125
                 Direction = Right
                 Color = 15
@@ -176,8 +176,8 @@ Coupled
             Parameters
                 {
                 Inputs = Str; %Inputs ; Number of inputs
-                Format = Str; set xrange [0:%tf] @ set grid @ set title 'Plot' ; General Formatting (use @ as line break)
-                Format1 = Str; with lines title 'First output' ; Formatting options for input 1
+                Format = Str; set xrange [0:%tf] @ set grid @ set title 'Piezas en Cinta' ; General Formatting (use @ as line break)
+                Format1 = Str; with lines title 'Nro Piezas en Cinta' ; Formatting options for input 1
                 Format2 = Str;  ; Formatting options for input 2
                 Format3 = Str;  ; Formatting options for input 3
                 Format4 = Str;  ; Formatting options for input 4
@@ -188,7 +188,7 @@ Coupled
             {
             Source = Cmp ;  2 ;  1 ; 0
             Sink = Cmp ;  1 ;  2 ; -1
-            PointX = -4200 ; -3900 ; -3900 ; -10425 ; -10425 ; -10065
+            PointX = -4200 ; -3900 ; -3900 ; -10425 ; -10425 ; -10140
             PointY = -5475 ; -5475 ; -5925 ; -5925 ; -4950 ; -4950
             }
         Line
@@ -223,29 +223,29 @@ Coupled
             {
             Source = Cmp ;  1 ;  1 ; 0
             Sink = Cmp ;  2 ;  1 ; -1
-            PointX = -8700 ; -8700 ; -5565
+            PointX = -8775 ; -8775 ; -5565
             PointY = -5475 ; -5475 ; -5475
+            }
+        Line
+            {
+            Source = Cmp ;  1 ;  3 ; 0
+            Sink = Cmp ;  7 ;  1 ; -1
+            PointX = -8775 ; -8400 ; -8400 ; -7965
+            PointY = -4800 ; -4800 ; -2700 ; -2700
             }
         Line
             {
             Source = Cmp ;  5 ;  1 ; 0
             Sink = Cmp ;  1 ;  1 ; -1
-            PointX = -10875 ; -10875 ; -10065
+            PointX = -10875 ; -10875 ; -10140
             PointY = -5400 ; -5400 ; -5400
             }
         Line
             {
             Source = Cmp ;  1 ;  2 ; 0
             Sink = Cmp ;  6 ;  1 ; -1
-            PointX = -8700 ; -8040 ; -8040
-            PointY = -5175 ; -5175 ; -4650
-            }
-        Line
-            {
-            Source = Cmp ;  1 ;  3 ; 0
-            Sink = Cmp ;  7 ;  1 ; -1
-            PointX = -8700 ; -8400 ; -8400 ; -8040
-            PointY = -4800 ; -4800 ; -2700 ; -2700
+            PointX = -8775 ; -8175 ; -8175 ; -8040
+            PointY = -5175 ; -5175 ; -4650 ; -4650
             }
         }
     }

@@ -5,43 +5,51 @@ va_list parameters;
 va_start(parameters,t);
 //To get a parameter: %Name% = va_arg(parameters,%Type%)
 //where:
-// %Name% is the parameter name
-//	%Type% is the parameter type
+//     %Name% is the parameter name
+//     %Type% is the parameter type
 
-_estado_cinta = CORRIENDO;
-
-numero_piezas_rechazadas = 0;
-
-INFINITO = DBL_MAX;
-
-sigma = INFINITO;
-
+//Obtener Parametros
 l = va_arg(parameters, double);
 deltal = va_arg(parameters, double);
 vc = va_arg(parameters, double);
 
+//Inicilizar Variables del Estado
+corre_cinta = false;//Cinta corriendo
+numero_piezas_rechazadas = 0;
+sigma = DBL_MAX;
+numero_piezas_totales = 0;
+
+//Inicializar Variables de Salida
 salida = "NULL";
 y = 0;
 
+//Aux
+salida_plot_rechazadas = false;
+salida_plot_piezas = false;
 }
 double cinta::ta(double t) {
 //This function returns a double.
 return sigma;
 }
 void cinta::dint(double t) {
-std::list<double>::iterator it = lista_distancias.begin();
-if (*it == l){
-	sigma = deltal/vc;
-}
-if (*it == (l+deltal)){
-	lista_distancias.pop_front();
-	it = lista_distancias.begin();
-	sigma = (l-*it)/vc;
-}
-if(_estado_cinta == DETENIDA){
-	sigma = INFINITO;
+std::list<double>::iterator i = lista_distancias.begin();
+
+if(salida_plot_rechazadas || salida_plot_piezas){
+	if(salida_plot_rechazadas){
+		salida_plot_rechazadas = false;
+		sigma = DBL_MAX;
+	}else{
+		if ( *i == (l+deltal) ){ //Salida por LEAVE
+			lista_distancias.pop_front();
+			i = lista_distancias.begin();
+			sigma = (l-*i)/vc;
+		}else{
+			sigma = _sigma;	//Salida por ARRIVE
+		}
+		salida_plot_piezas = false;
+	}
 }else{
-	sigma = _sigma;
+	sigma = deltal/vc;
 }
 }
 void cinta::dext(Event x, double t) {
@@ -51,54 +59,58 @@ void cinta::dext(Event x, double t) {
 //     'x.port' is the port number
 //     'e' is the time elapsed since last transition
 std::string valor = *(std::string*)(x.value);
-std::list<double>::iterator it = lista_distancias.begin();
+std::list<double>::iterator i = lista_distancias.begin();
 
-if(_estado_cinta == DETENIDA){
-	
-	if(valor == "ARRIVE"){
-		numero_piezas_rechazadas++;
-		sigma = 0;
-	}
-	if(valor == "START"){
-		_estado_cinta = CORRIENDO;
-		sigma = (l-*it)/vc;
-	}
-	if(valor == "STOP"){
-		sigma = INFINITO;
-	}
-}else{
-	if(_estado_cinta == CORRIENDO){
-		
+if(corre_cinta){
+		//Cinta Corriendo
 		if(valor == "ARRIVE"){
-			it = lista_distancias.begin();
-			while(it != lista_distancias.end()){
-				*it += (vc * (double) e);
-				it++;
+			numero_piezas_totales++;
+			if(!lista_distancias.empty()){
+				i = lista_distancias.begin();
+				_sigma = (l-*i)/vc;
+				while(i != lista_distancias.end()){
+					*i += (vc * (double) e);
+					i++;
+				}
+			}else{
+				_sigma = l/vc;
 			}
 			lista_distancias.push_back(0);
-			//salida con lista_distancias.size();
-			_sigma = sigma - ( (double) e );
+			salida_plot_piezas = true;
 			sigma = 0;
 		}
 		if(valor == "START"){
-			_estado_cinta = CORRIENDO;
-			it = lista_distancias.begin();
-			while(it != lista_distancias.end()){
-				*it += (vc * (double) e);
-				it++;
+			corre_cinta = true;
+			i = lista_distancias.begin();
+			while(i != lista_distancias.end()){
+				*i += (vc * (double) e);
+				i++;
 			}
 			sigma -= (double) e;
 		}
 		if(valor == "STOP"){
-			_estado_cinta = DETENIDA;
-			it = lista_distancias.begin();
-			while(it != lista_distancias.end()){
-				*it += (vc * (double) e);
-				it++;
+			corre_cinta = false;
+			i = lista_distancias.begin();
+			while(i != lista_distancias.end()){
+				*i += (vc * (double) e);
+				i++;
 			}
-			sigma = INFINITO;
+			sigma = DBL_MAX;
 		}
+}else{
+	if(valor == "ARRIVE"){
+		numero_piezas_totales++;
+		numero_piezas_rechazadas++;
+		salida_plot_rechazadas = true;
+		sigma = 0;
 	}
+	if(valor == "START"){
+		corre_cinta = true;
+		sigma = (l-*i)/vc;
+	}
+	if(valor == "STOP"){
+		sigma = DBL_MAX;
+	}	
 }
 }
 Event cinta::lambda(double t) {
@@ -108,25 +120,29 @@ Event cinta::lambda(double t) {
 //     %&Value% points to the variable which contains the value.
 //     %NroPort% is the port number (from 0 to n-1)
 
-std::list<double>::iterator it = lista_distancias.begin();
+std::list<double>::iterator i = lista_distancias.begin();
 
-if (*it == l){
-	salida = "DETECT";
-	return Event(&salida,0);
-}
-if (*it == (l+deltal)){
-	//salida con lista_distancias.size();
-	salida = "LEAVE";
-	return Event(&salida,0);
-}
-if(_estado_cinta == DETENIDA){
-	y = numero_piezas_rechazadas;
-	//Salida al plot de numero de piezas rechazada.
-	return Event(&y,1);
+if( salida_plot_rechazadas || salida_plot_piezas ){
+	if( salida_plot_rechazadas ){
+		//Salida al plot de numero de piezas rechazada.	
+		//y = (numero_piezas_rechazadas/numero_piezas_totales) * 100;
+		y = numero_piezas_rechazadas;
+		return Event(&y,1);	
+	}else{
+		//Salida al plot de numero de piezas en cinta
+		y = lista_distancias.size();
+		return Event(&y,2);
+	}
 }else{
-	y = lista_distancias.size();
-	//Salida al plot de numero de piezas en cinta.
-	return Event(&y,2);
+	if( *i < l ){
+		*i = l;
+		salida = "DETECT";
+	}else{
+		*i = l+deltal;
+		salida = "LEAVE";
+		salida_plot_piezas = true;
+	}
+	return Event(&salida,0);
 }
 }
 void cinta::exit() {

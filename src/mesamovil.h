@@ -6,12 +6,29 @@
 #include "event.h"
 #include "stdarg.h"
 
+#include "limits"
+#include "string"
+#include "cfloat"
 
 
 class mesamovil: public Simulator { 
-// Declare the state,
+// Declare the state, 
+double sigma;
 // output variables
+
+std::string salida; 
+
+double y;
+
 // and parameters
+
+double l; 
+
+double deltal;
+
+double vc;
+
+
 
 public:
 	mesamovil(const char *n): Simulator(n) {};

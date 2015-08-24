@@ -12,21 +12,33 @@
 
 class generador: public Simulator { 
 // Declare the state,
+
 double s;
+
 // output variables
+
 std::string y;
+
 // and parameters
+
 double sigma;
 
-double _lambda;
+double lambda_distribucion;
 
-double _l;
+double l;
 
-double _deltal;
+double deltal;
 
-double _vc;
+double vc;
+
+//Aux
 
 double u;
+
+
+
+
+
 
 
 
