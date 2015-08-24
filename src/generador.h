@@ -1,4 +1,4 @@
-//CPP:proyecto-2015/generador.cpp
+//CPP:src/generador.cpp
 #if !defined generador_h
 #define generador_h
 
@@ -6,21 +6,31 @@
 #include "event.h"
 #include "stdarg.h"
 
-#include "C:/PowerDEVS/bin/gcc/include/stdlib.h"
-#include "C:/PowerDEVS/bin/gcc/include/math.h"
+#include "string"
+#include "cmath"
 
 
 class generador: public Simulator { 
 // Declare the state,
 double s;
 // output variables
-double y;
+std::string y;
 // and parameters
 double sigma;
 
-double lamb;
+double _lambda;
+
+double _l;
+
+double _deltal;
+
+double _vc;
 
 double u;
+
+
+
+
 
 public:
 	generador(const char *n): Simulator(n) {};

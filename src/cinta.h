@@ -1,4 +1,4 @@
-//CPP:proyecto-2015/cinta.cpp
+//CPP:src/cinta.cpp
 #if !defined cinta_h
 #define cinta_h
 
@@ -20,16 +20,13 @@ enum Estado_Cinta {CORRIENDO , DETENIDA};
 
 Estado_Cinta _estado_cinta;
 
-double piezas_rechazadas;
+double numero_piezas_rechazadas;
 
 // output variables
-enum Salida {LEAVE , DETECT};
 
-Salida y;
+std::string salida;
 
-double salida_piezas_cinta;
-
-double salida_piezas_rechazadas;
+double y;
 
 // and parameters
 double sigma;
@@ -43,6 +40,10 @@ double vc;
 //std::numeric_limits<double>::max();
 
 double INFINITO;
+
+double _sigma;
+
+
 public:
 	cinta(const char *n): Simulator(n) {};
 	void init(double, ...);

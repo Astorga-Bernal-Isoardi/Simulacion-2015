@@ -15,202 +15,237 @@ Coupled
         }
     Parameters
         {
+        l = Val; 2 ; Longitud de la Cinta.
+        deltal = Val; 0.5 ; Longitud de los objetos de que viajan en la cinta.
+        vc = Val; 9 ; Velocidad a la cual se mueve la cinta.
+        tmov = Val; 2.5 ; Velocidad de los movimientos de las mesas moviles.
         }
     System
         {
         Atomic
             {
-            Name = Plot Piezas Perdidas
-            Ports = 1 ; 0
-            Path = sinks/toscilab_offline.h
-            Description = Sends input signal to Scilab Workspace
-            Graphic
-                {
-                Position = -7905 ; -4830
-                Dimension = 1125 ; 1125
-                Direction = Right
-                Color = 15
-                Icon = ../examples/proyecto-2015/icons/plot.svg
-                }
-            Parameters
-                {
-                Time variable = Str; t ; 
-                Signal = Str; y ; 
-                }
-            }
-        Atomic
-            {
             Name = Cinta
             Ports = 2 ; 3
-            Path = proyecto-2015/cinta.h
-            Description = Atomic DEVS model
+            Path = src/cinta.h
+            Description = Cinta transportadora\n\nParametros:\n\nl = Longitud de la Cinta.\n\ndeltal = Longitud de los objetos de que viajan en la cinta.\n\nvc = Velocidad a la cual se mueve la cinta.
             Graphic
                 {
                 Position = -9930 ; -5730
                 Dimension = 1125 ; 1125
                 Direction = Right
                 Color = 15
-                Icon = ../examples/proyecto-2015/icons/cinta.svg
+                Icon = %icons%cinta.svg
                 }
             Parameters
                 {
+                l = Val; 2 ; Puerto de la Mesa 2.
+                deltal = Val; 0.5 ; Puerto de la Mesa 2.
+                vc = Val; 9 ; Puerto de la Mesa 2.
                 }
             }
         Atomic
             {
             Name = Sistema de Control
             Ports = 3 ; 3
-            Path = 
-            Description = Atomic DEVS model
+            Path = src/sistemacontrol.h
+            Description = Sistema de Control\n\nParametros:\n\nmesa1 = Puerto de la Mesa 1.\n\nmesa2 = Puerto de la Mesa 2.\n\nl = Longitud de la Cinta.\n\ndeltal = Longitud de los objetos de que viajan en la cinta.\n\nvc = Velocidad a la cual se mueve la cinta.
             Graphic
                 {
                 Position = -5430 ; -5730
                 Dimension = 1125 ; 1125
                 Direction = Right
                 Color = 15
-                Icon = ../examples/proyecto-2015/icons/control.svg
+                Icon = %icons%control.svg
                 }
             Parameters
                 {
+                l = Val; 2 ; Longitud de la Cinta.
+                deltal = Val; 0.5 ; Longitud de los objetos de que viajan en la cinta.
+                vc = Val; 9 ; Velocidad a la cual se mueve la cinta.
+                mesa1 = Val; 1 ; Puerto de la Mesa 1.
+                mesa2 = Val; 2 ; Puerto de la Mesa 2.
                 }
             }
         Atomic
             {
-            Name = Mesa 1
+            Name = Mesa Movil 1
             Ports = 1 ; 1
-            Path = 
-            Description = Atomic DEVS model
+            Path = src/mesamovil.h
+            Description = Mesa Movil\n\nParametros:\n\ntmov = Velocidad de los movimientos de la cinta.\n\npuerto = Puerto asignado a la mesa movil.\n\nl = Longitud de la Cinta.\n\ndeltal = Longitud de los objetos de que viajan en la cinta.\n\nvc = Velocidad a la cual se mueve la cinta.
             Graphic
                 {
                 Position = -3480 ; -7080
                 Dimension = 1125 ; 1125
                 Direction = Right
                 Color = 15
-                Icon = ../examples/proyecto-2015/icons/mesa.svg
+                Icon = %icons%mesa.svg
                 }
             Parameters
                 {
+                tmov = Val; 2.5 ; Velocidad de los movimientos de la cinta.
+                puerto = Val; 1 ; Puerto asignado a la mesa movil.
+                l = Val; 2 ; Longitud de la Cinta.
+                deltal = Val; 0.5 ; Longitud de los objetos de que viajan en la cinta.
+                vc = Val; 9 ; Velocidad a la cual se mueve la cinta.
                 }
             }
         Atomic
             {
-            Name = Mesa 2
+            Name = Mesa Movil 2
             Ports = 1 ; 1
-            Path = 
-            Description = Atomic DEVS model
+            Path = src/mesamovil.h
+            Description = Mesa Movil\n\nParametros:\n\ntmov = Velocidad de los movimientos de la cinta.\n\npuerto = Puerto asignado a la mesa movil.\n\nl = Longitud de la Cinta.\n\ndeltal = Longitud de los objetos de que viajan en la cinta.\n\nvc = Velocidad a la cual se mueve la cinta.
             Graphic
                 {
                 Position = -3480 ; -4005
                 Dimension = 1125 ; 1125
                 Direction = Right
                 Color = 15
-                Icon = ../examples/proyecto-2015/icons/mesa.svg
+                Icon = %icons%mesa.svg
                 }
             Parameters
                 {
-                }
-            }
-        Atomic
-            {
-            Name = Plot Piezas en Cinta
-            Ports = 1 ; 0
-            Path = sources/fromworkspace.h
-            Description = Reads an input signal from Scilab Workspace
-            Graphic
-                {
-                Position = -7905 ; -3180
-                Dimension = 1125 ; 1125
-                Direction = Right
-                Color = 15
-                Icon = ../examples/proyecto-2015/icons/plot.svg
-                }
-            Parameters
-                {
-                Time variable = Str; t ; 
-                Signal = Str; u ; 
-                Method = Lst; 1%QSS%QSS2/3% ; 
+                tmov = Val; 2.5 ; Velocidad de los movimientos de la cinta.
+                puerto = Val; 2 ; Puerto asignado a la mesa movil.
+                l = Val; 2 ; Longitud de la Cinta.
+                deltal = Val; 0.5 ; Longitud de los objetos de que viajan en la cinta.
+                vc = Val; 9 ; Velocidad a la cual se mueve la cinta.
                 }
             }
         Atomic
             {
             Name = Generador
             Ports = 0 ; 1
-            Path = proyecto-2015/generador.h
-            Description = Atomic DEVS model
+            Path = src/generador.h
+            Description = Generador\n\nParametros:\n\nlambda= Parametro para la distribucion del generador.\n\nl = Longitud de la Cinta.\n\ndeltal = Longitud de los objetos de que viajan en la cinta.\n\nvc = Velocidad a la cual se mueve la cinta.
             Graphic
                 {
                 Position = -12105 ; -5955
                 Dimension = 1125 ; 1125
                 Direction = Right
                 Color = 15
-                Icon = ../examples/proyecto-2015/icons/generador.svg
+                Icon = %icons%generador.svg
                 }
             Parameters
                 {
+                lambda = Val; 0.1 ; Parametro para la distribucion del generador
+                l = Val; 2 ; Longitud de la Cinta
+                deltal = Val; 0.5 ; Longitud de los objetos de que viajan en la cinta
+                vc = Val; 9 ; Velocidad a la cual se mueve la cinta
+                }
+            }
+        Atomic
+            {
+            Name = Plot Piezas Rechazadas
+            Ports = 1 ; 0
+            Path = sinks/gnuplot.h
+            Description = Plot input signal using GnuPlot
+            Graphic
+                {
+                Position = -7905 ; -5205
+                Dimension = 1125 ; 1125
+                Direction = Right
+                Color = 15
+                Icon = %icons%plot.svg
+                }
+            Parameters
+                {
+                Inputs = Str; %Inputs ; Number of inputs
+                Format = Str; set xrange [0:%tf] @ set grid @ set title 'Plot' ; General Formatting (use @ as line break)
+                Format1 = Str; with lines title 'First output' ; Formatting options for input 1
+                Format2 = Str;  ; Formatting options for input 2
+                Format3 = Str;  ; Formatting options for input 3
+                Format4 = Str;  ; Formatting options for input 4
+                Format5 = Str;  ; Formatting options for input 5
+                }
+            }
+        Atomic
+            {
+            Name = Plot Piezas en Cinta
+            Ports = 1 ; 0
+            Path = sinks/gnuplot.h
+            Description = Plot input signal using GnuPlot
+            Graphic
+                {
+                Position = -7905 ; -3255
+                Dimension = 1125 ; 1125
+                Direction = Right
+                Color = 15
+                Icon = %icons%plot.svg
+                }
+            Parameters
+                {
+                Inputs = Str; %Inputs ; Number of inputs
+                Format = Str; set xrange [0:%tf] @ set grid @ set title 'Plot' ; General Formatting (use @ as line break)
+                Format1 = Str; with lines title 'First output' ; Formatting options for input 1
+                Format2 = Str;  ; Formatting options for input 2
+                Format3 = Str;  ; Formatting options for input 3
+                Format4 = Str;  ; Formatting options for input 4
+                Format5 = Str;  ; Formatting options for input 5
                 }
             }
         Line
             {
-            Source = Cmp ;  3 ;  1 ; 0
-            Sink = Cmp ;  2 ;  2 ; -1
+            Source = Cmp ;  2 ;  1 ; 0
+            Sink = Cmp ;  1 ;  2 ; -1
             PointX = -4200 ; -3900 ; -3900 ; -10425 ; -10425 ; -10065
             PointY = -5475 ; -5475 ; -5925 ; -5925 ; -4950 ; -4950
             }
         Line
             {
-            Source = Cmp ;  3 ;  2 ; 0
-            Sink = Cmp ;  4 ;  1 ; -1
+            Source = Cmp ;  2 ;  2 ; 0
+            Sink = Cmp ;  3 ;  1 ; -1
             PointX = -4200 ; -3750 ; -3750 ; -3615
             PointY = -5175 ; -5175 ; -6525 ; -6525
             }
         Line
             {
-            Source = Cmp ;  3 ;  3 ; 0
-            Sink = Cmp ;  5 ;  1 ; -1
+            Source = Cmp ;  2 ;  3 ; 0
+            Sink = Cmp ;  4 ;  1 ; -1
             PointX = -4200 ; -3750 ; -3750 ; -3615
             PointY = -4800 ; -4800 ; -3450 ; -3450
             }
         Line
             {
-            Source = Cmp ;  4 ;  1 ; 0
-            Sink = Cmp ;  3 ;  2 ; -1
+            Source = Cmp ;  3 ;  1 ; 0
+            Sink = Cmp ;  2 ;  2 ; -1
             PointX = -2250 ; -1800 ; -1800 ; -6075 ; -6075 ; -5565
             PointY = -6525 ; -6525 ; -2175 ; -2175 ; -5175 ; -5175
             }
         Line
             {
-            Source = Cmp ;  5 ;  1 ; 0
-            Sink = Cmp ;  3 ;  3 ; -1
+            Source = Cmp ;  4 ;  1 ; 0
+            Sink = Cmp ;  2 ;  3 ; -1
             PointX = -2250 ; -2025 ; -2025 ; -5850 ; -5850 ; -5565
             PointY = -3450 ; -3450 ; -2475 ; -2475 ; -4800 ; -4800
             }
         Line
             {
-            Source = Cmp ;  2 ;  1 ; 0
-            Sink = Cmp ;  3 ;  1 ; -1
+            Source = Cmp ;  1 ;  1 ; 0
+            Sink = Cmp ;  2 ;  1 ; -1
             PointX = -8700 ; -8700 ; -5565
             PointY = -5475 ; -5475 ; -5475
             }
         Line
             {
-            Source = Cmp ;  2 ;  2 ; 0
+            Source = Cmp ;  5 ;  1 ; 0
             Sink = Cmp ;  1 ;  1 ; -1
-            PointX = -8700 ; -8175 ; -8175 ; -8040
-            PointY = -5175 ; -5175 ; -4275 ; -4275
-            }
-        Line
-            {
-            Source = Cmp ;  6 ;  1 ; -1
-            Sink = Cmp ;  2 ;  3 ; 0
-            PointX = -8040 ; -8400 ; -8400 ; -8700
-            PointY = -2625 ; -2625 ; -4800 ; -4800
-            }
-        Line
-            {
-            Source = Cmp ;  7 ;  1 ; 0
-            Sink = Cmp ;  2 ;  1 ; -1
             PointX = -10875 ; -10875 ; -10065
             PointY = -5400 ; -5400 ; -5400
+            }
+        Line
+            {
+            Source = Cmp ;  1 ;  2 ; 0
+            Sink = Cmp ;  6 ;  1 ; -1
+            PointX = -8700 ; -8040 ; -8040
+            PointY = -5175 ; -5175 ; -4650
+            }
+        Line
+            {
+            Source = Cmp ;  1 ;  3 ; 0
+            Sink = Cmp ;  7 ;  1 ; -1
+            PointX = -8700 ; -8400 ; -8400 ; -8040
+            PointY = -4800 ; -4800 ; -2700 ; -2700
             }
         }
     }

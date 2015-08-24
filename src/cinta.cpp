@@ -10,21 +10,19 @@ va_start(parameters,t);
 
 _estado_cinta = CORRIENDO;
 
-piezas_rechazadas = 0;
-
-salida_piezas_cinta = 0;
-
-salida_piezas_rechazadas = 0;
+numero_piezas_rechazadas = 0;
 
 INFINITO = DBL_MAX;
 
 sigma = INFINITO;
 
 l = va_arg(parameters, double);
-
 deltal = va_arg(parameters, double);
-
 vc = va_arg(parameters, double);
+
+salida = "NULL";
+y = 0;
+
 }
 double cinta::ta(double t) {
 //This function returns a double.
@@ -40,7 +38,11 @@ if (*it == (l+deltal)){
 	it = lista_distancias.begin();
 	sigma = (l-*it)/vc;
 }
-
+if(_estado_cinta == DETENIDA){
+	sigma = INFINITO;
+}else{
+	sigma = _sigma;
+}
 }
 void cinta::dext(Event x, double t) {
 //The input event is in the 'x' variable.
@@ -54,8 +56,8 @@ std::list<double>::iterator it = lista_distancias.begin();
 if(_estado_cinta == DETENIDA){
 	
 	if(valor == "ARRIVE"){
-		piezas_rechazadas++;
-		sigma = INFINITO;
+		numero_piezas_rechazadas++;
+		sigma = 0;
 	}
 	if(valor == "START"){
 		_estado_cinta = CORRIENDO;
@@ -74,7 +76,9 @@ if(_estado_cinta == DETENIDA){
 				it++;
 			}
 			lista_distancias.push_back(0);
-			sigma -= (double) e;
+			//salida con lista_distancias.size();
+			_sigma = sigma - ( (double) e );
+			sigma = 0;
 		}
 		if(valor == "START"){
 			_estado_cinta = CORRIENDO;
@@ -105,14 +109,25 @@ Event cinta::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 
 std::list<double>::iterator it = lista_distancias.begin();
+
 if (*it == l){
-	y = DETECT;
+	salida = "DETECT";
+	return Event(&salida,0);
 }
 if (*it == (l+deltal)){
-	y = LEAVE;
+	//salida con lista_distancias.size();
+	salida = "LEAVE";
+	return Event(&salida,0);
 }
-
-return Event(&y,0);
+if(_estado_cinta == DETENIDA){
+	y = numero_piezas_rechazadas;
+	//Salida al plot de numero de piezas rechazada.
+	return Event(&y,1);
+}else{
+	y = lista_distancias.size();
+	//Salida al plot de numero de piezas en cinta.
+	return Event(&y,2);
+}
 }
 void cinta::exit() {
 //Code executed at the end of the simulation.
