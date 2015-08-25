@@ -14,19 +14,23 @@
 class mesamovil: public Simulator { 
 // Declare the state, 
 double sigma;
-// output variables
 
+// output variables
 std::string salida; 
 
 double y;
 
 // and parameters
-
 double l; 
 
 double deltal;
 
+double tmov;
+
 double vc;
+
+//Aux 
+double s;
 
 
 
