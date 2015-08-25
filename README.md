@@ -10,7 +10,7 @@ Integrantes
 
 Requerimentos
 ===================
-*PowerDevs
+* PowerDevs
 
 Instalación
 ===================
