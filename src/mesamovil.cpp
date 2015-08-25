@@ -12,6 +12,8 @@ va_start(parameters,t);
 l = va_arg(parameters, double); //Longitud de la cinta
 deltal = va_arg(parameters, double); //Longitud de los objetos que viajan en la cinta
 vc = va_arg(parameters, double); //Velocidad a la cual se mueve la cinta
+tmov = va_arg(parameters, double);
+puerto = va_arg(parameters, double);
 
 //Inicilizar Variables del Estado
 sigma = DBL_MAX;
@@ -65,7 +67,7 @@ if(salida != "NULL" ){
 		if(vx == "PICK"){
         srand(time(NULL));
 			s = rand()%(6)+ 3; 
-			salida = "PICKED";
+			salida = "PIKED";
 			sigma = s;
 		} 	 
 } else {
@@ -83,8 +85,7 @@ Event mesamovil::lambda(double t) {
 //     %&Value% points to the variable which contains the value.
 //     %NroPort% is the port number (from 0 to n-1)
 
-
-return Event(&salida,1);
+return Event(&salida,2);
 }
 void mesamovil::exit() {
 //Code executed at the end of the simulation.
