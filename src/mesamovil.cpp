@@ -9,16 +9,15 @@ va_start(parameters,t);
 // %Type% is the parameter type
 
 //Obtener Parametros
-l = va_arg(parameters, double); 
-deltal = va_arg(parameters, double);
-vc = va_arg(parameters, double);
+l = va_arg(parameters, double); //Longitud de la cinta
+deltal = va_arg(parameters, double); //Longitud de los objetos que viajan en la cinta
+vc = va_arg(parameters, double); //Velocidad a la cual se mueve la cinta
 
 //Inicilizar Variables del Estado
 sigma = DBL_MAX;
 
 //Inicializar Variables de Salida 
 salida = "NULL";
-y = 0;
 }
 double mesamovil::ta(double t) {
 //This function returns a double.
@@ -26,7 +25,11 @@ return sigma;
 
 }
 void mesamovil::dint(double t) {
+//Inicilizar Variables del Estado
+sigma = DBL_MAX;
 
+//Inicializar Variables de Salida 
+salida = "NULL";
 }
 void mesamovil::dext(Event x, double t) {
 //The input event is in the 'x' variable.
@@ -34,7 +37,44 @@ void mesamovil::dext(Event x, double t) {
 //     'x.value' is the value (pointer to void)
 //     'x.port' is the port number
 //     'e' is the time elapsed since last transition
+std::string vx = *(std::string*)(x.value);
+// Asumiendo que el sistema de control sabe  
+// que esta en posicion correcta
 
+if(salida != "NULL" ){
+		if(vx == "ARRIVE"){
+			salida = "UP";
+			sigma = tmov;
+		}
+		if(vx == "MOVE UP"){
+			salida = "UP";
+			sigma = tmov;
+		}
+		if(vx == "MOVE DOWN"){
+			salida = "DOWN";
+			sigma = tmov;
+		}
+		if(vx == "ROTATE LEFT"){
+			salida = "LEFT";
+			sigma = tmov;
+		}
+		if(vx == "ROTATE RIGHT"){
+			salida = "RIGHT";
+			sigma = tmov;
+		}
+		if(vx == "PICK"){
+        srand(time(NULL));
+			s = rand()%(6)+ 3; 
+			salida = "PICKED";
+			sigma = s;
+		} 	 
+} else {
+		//Inicilizar Variables del Estado
+		sigma = DBL_MAX;
+		//Inicializar Variables de Salida 
+		salida = "NULL";
+}
+	
 }
 Event mesamovil::lambda(double t) {
 //This function returns an Event:
@@ -44,7 +84,7 @@ Event mesamovil::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 
 
-return Event();
+return Event(&salida,1);
 }
 void mesamovil::exit() {
 //Code executed at the end of the simulation.
