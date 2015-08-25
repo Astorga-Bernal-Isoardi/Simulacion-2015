@@ -1,18 +1,18 @@
-# Proyecto 2015 - Simulación
+# Proyecto 2015 - SimulaciÃ³n
 
-Proyecto Final - Sistema de Produción Simplificado
+Proyecto Final - Sistema de ProduciÃ³n Simplificado
 
 Integrantes
 ===================
-* Darío Astorga
-* Matias Bernal
-* Bruno Isoardi
+* [Dario Astorga](https://github.com/dastorga) 
+* [Matias Bernal](https://github.com/Matias-Bernal)
+* [Bruno Isoardi](https://github.com/bisoardi)
 
 Requerimentos
 ===================
 *PowerDevs
 
-Instalación
+InstalaciÃ³n
 ===================
 
 * Copiar la carpteta "src" en "PowerDEVS\atomics".
