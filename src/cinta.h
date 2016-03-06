@@ -1,4 +1,4 @@
-//CPP:src/cinta.cpp
+//CPP:custom/cinta.cpp
 #if !defined cinta_h
 #define cinta_h
 
@@ -10,6 +10,7 @@
 #include "limits"
 #include "string"
 #include "cfloat"
+#include "tuple"
 
 
 class cinta: public Simulator { 
@@ -19,11 +20,11 @@ std::list<double> lista_distancias;
 
 bool corre_cinta; //True = Corriendo | False = Detenida //
 
-double numero_piezas_rechazadas;
+std::list<std::tuple<double,double>> numero_piezas_rechazadas;
+
+std::list<std::tuple<double,double>> numero_piezas_totales;
 
 double sigma;
-
-double numero_piezas_totales;
 
 // output variables
 
@@ -39,21 +40,13 @@ double deltal;
 
 double vc;
 
-//Aux
+// Aux
 
-bool salida_plot_rechazadas;
+std::tuple<double,double> initial_value (0,0);
 
-bool salida_plot_piezas;
- 
 double _sigma;
 
-
-
-
-
-
-
-
+double T = 0;
 
 public:
 	cinta(const char *n): Simulator(n) {};

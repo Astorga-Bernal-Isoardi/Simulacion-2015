@@ -15,17 +15,13 @@ vc = va_arg(parameters, double);
 
 //Inicilizar Variables del Estado
 corre_cinta = true;//Cinta corriendo
-numero_piezas_rechazadas = 0;
+numero_piezas_rechazadas.push_back(initial_value);
+numero_piezas_totales.push_back(initial_value);
 sigma = DBL_MAX;
-numero_piezas_totales = 0;
 
 //Inicializar Variables de Salida
 salida = "NULL";
 y = 0;
-
-//Aux
-salida_plot_rechazadas = false;
-salida_plot_piezas = false;
 }
 double cinta::ta(double t) {
 //This function returns a double.
@@ -34,23 +30,23 @@ return sigma;
 void cinta::dint(double t) {
 std::list<double>::iterator i = lista_distancias.begin();
 
-if(salida_plot_rechazadas || salida_plot_piezas){
-	if(salida_plot_rechazadas){
-		salida_plot_rechazadas = false;
-		sigma = DBL_MAX;
-	}else{
-		if ( *i == (l+deltal) ){ //Salida por LEAVE
-			lista_distancias.pop_front();
-			i = lista_distancias.begin();
-			sigma = (l-*i)/vc;
-		}else{
-			sigma = _sigma;	//Salida por ARRIVE
-		}
-		salida_plot_piezas = false;
-	}
-}else{
-	sigma = deltal/vc;
+if ( *i == l ) ){ //Salida por ARRIVE
+	sigma = (l-*i)/vc;
 }
+if ( *i == (l+deltal) ){ //Salida por LEAVE
+	lista_distancias.pop_front();
+
+   // En caso de que sea por referencia
+	// Usar copy
+   std::tuple<double,double> new_value (initial_value);
+	std::get<0>(new_value) = (std::get<0>(numero_piezas_totales.begin())-1;
+	std::get<1>(new_value) = T; //Tiempo de la simulacion
+ 
+	numero_piezas_totales.push_back(new_value);
+	i = lista_distancias.begin();
+	sigma = (l-*i)/vc;
+}
+
 }
 void cinta::dext(Event x, double t) {
 //The input event is in the 'x' variable.
@@ -64,23 +60,26 @@ std::list<double>::iterator i = lista_distancias.begin();
 if(corre_cinta){
 		//Cinta Corriendo
 		if(valor == "ARRIVE"){
-			numero_piezas_totales++;
+			// En caso de que sea por referencia
+			// Usar copy
+  		 	std::tuple<double,double> new_value (initial_value);
+			std::get<0>(new_value) = (std::get<0>(numero_piezas_totales.begin())+1;
+			std::get<1>(new_value) = T; //Tiempo de la simulacion
+			numero_piezas_totales.push_back(new_value);
+
 			if(!lista_distancias.empty()){
 				i = lista_distancias.begin();
-				_sigma = (l-*i)/vc;
-				while(i != lista_distancias.end()){
+				sigma = (l-*i)/vc;
+				while( i!= lista_distancias.end()){
 					*i += (vc * (double) e);
 					i++;
 				}
 			}else{
-				_sigma = l/vc;
+				sigma = l/vc;
 			}
 			lista_distancias.push_back(0);
-			salida_plot_piezas = true;
-			sigma = 0;
 		}
 		if(valor == "START"){
-			corre_cinta = true;
 			i = lista_distancias.begin();
 			while(i != lista_distancias.end()){
 				*i += (vc * (double) e);
@@ -99,10 +98,11 @@ if(corre_cinta){
 		}
 }else{
 	if(valor == "ARRIVE"){
-		numero_piezas_totales++;
-		numero_piezas_rechazadas++;
-		salida_plot_rechazadas = true;
-		sigma = 0;
+		std::tuple<double,double> new_value (initial_value);
+		std::get<0>(new_value) = (std::get<0>(numero_piezas_rechazadas.begin())+1;
+		std::get<1>(new_value) = T; //Tiempo de la simulacion
+		numero_piezas_rechazadas.push_back(new_value);
+		sigma = DBL_MAX;
 	}
 	if(valor == "START"){
 		corre_cinta = true;
@@ -121,28 +121,14 @@ Event cinta::lambda(double t) {
 //     %NroPort% is the port number (from 0 to n-1)
 
 std::list<double>::iterator i = lista_distancias.begin();
-
-if( salida_plot_rechazadas || salida_plot_piezas ){
-	if( salida_plot_rechazadas ){
-		//Salida al plot de numero de piezas rechazada.	
-		y = (numero_piezas_rechazadas/numero_piezas_totales) * 100;
-		return Event(&y,1);	
-	}else{
-		//Salida al plot de numero de piezas en cinta
-		y = lista_distancias.size();
-		return Event(&y,2);
-	}
+if( *i < l ){
+	*i = l;
+	salida = "DETECT";
 }else{
-	if( *i < l ){
-		*i = l;
-		salida = "DETECT";
-	}else{
-		*i = l+deltal;
-		salida = "LEAVE";
-		salida_plot_piezas = true;
-	}
-	return Event(&salida,0);
+	*i = l+deltal;
+	salida = "LEAVE";
 }
+return Event(&salida,0);
 }
 void cinta::exit() {
 //Code executed at the end of the simulation.
