@@ -1,3 +1,4 @@
+//FLAGS:-std=c++0x
 //CPP:custom/cinta.cpp
 #if !defined cinta_h
 #define cinta_h
@@ -42,11 +43,16 @@ double vc;
 
 // Aux
 
-std::tuple<double,double> initial_value (0,0);
+std::tuple<double,double> initial_value;
 
 double _sigma;
 
-double T = 0;
+double t;
+
+double v;
+
+
+
 
 public:
 	cinta(const char *n): Simulator(n) {};

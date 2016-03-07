@@ -22,6 +22,7 @@ sigma = DBL_MAX;
 //Inicializar Variables de Salida
 salida = "NULL";
 y = 0;
+t = 0;
 }
 double cinta::ta(double t) {
 //This function returns a double.
@@ -29,8 +30,9 @@ return sigma;
 }
 void cinta::dint(double t) {
 std::list<double>::iterator i = lista_distancias.begin();
+std::list<std::tuple<double,double>>::iterator j = numero_piezas_totales.begin();
 
-if ( *i == l ) ){ //Salida por ARRIVE
+if ( *i == l ) { //Salida por ARRIVE
 	sigma = (l-*i)/vc;
 }
 if ( *i == (l+deltal) ){ //Salida por LEAVE
@@ -38,9 +40,10 @@ if ( *i == (l+deltal) ){ //Salida por LEAVE
 
    // En caso de que sea por referencia
 	// Usar copy
-   std::tuple<double,double> new_value (initial_value);
-	std::get<0>(new_value) = (std::get<0>(numero_piezas_totales.begin())-1;
-	std::get<1>(new_value) = T; //Tiempo de la simulacion
+  	std::tuple<double,double> new_value (initial_value);
+	v = std::get<0>(*j);
+	std::get<0>(new_value) = v-1;
+	std::get<1>(new_value) = t; //Tiempo de la simulacion
  
 	numero_piezas_totales.push_back(new_value);
 	i = lista_distancias.begin();
@@ -56,6 +59,7 @@ void cinta::dext(Event x, double t) {
 //     'e' is the time elapsed since last transition
 std::string valor = *(std::string*)(x.value);
 std::list<double>::iterator i = lista_distancias.begin();
+std::list<std::tuple<double,double>>::iterator j = numero_piezas_totales.begin();
 
 if(corre_cinta){
 		//Cinta Corriendo
@@ -63,8 +67,9 @@ if(corre_cinta){
 			// En caso de que sea por referencia
 			// Usar copy
   		 	std::tuple<double,double> new_value (initial_value);
-			std::get<0>(new_value) = (std::get<0>(numero_piezas_totales.begin())+1;
-			std::get<1>(new_value) = T; //Tiempo de la simulacion
+			v = std::get<0>(*j);
+			std::get<0>(new_value) = v+1;
+			std::get<1>(new_value) = t; //Tiempo de la simulacion
 			numero_piezas_totales.push_back(new_value);
 
 			if(!lista_distancias.empty()){
@@ -99,8 +104,9 @@ if(corre_cinta){
 }else{
 	if(valor == "ARRIVE"){
 		std::tuple<double,double> new_value (initial_value);
-		std::get<0>(new_value) = (std::get<0>(numero_piezas_rechazadas.begin())+1;
-		std::get<1>(new_value) = T; //Tiempo de la simulacion
+		v = std::get<0>(*j);
+		std::get<0>(new_value) = v+1;
+		std::get<1>(new_value) = t; //Tiempo de la simulacion
 		numero_piezas_rechazadas.push_back(new_value);
 		sigma = DBL_MAX;
 	}
