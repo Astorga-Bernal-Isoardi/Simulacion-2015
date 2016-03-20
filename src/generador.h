@@ -44,6 +44,15 @@ double u;
 
 
 
+
+
+
+
+
+
+
+
+
 public:
 	generador(const char *n): Simulator(n) {};
 	void init(double, ...);

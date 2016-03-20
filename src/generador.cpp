@@ -34,7 +34,6 @@ do{
 	u = (rand()/(double) (RAND_MAX + 1));
 	s = -log(u)/lambda_distribucion;
 } while (s < (deltal / vc));
-
 sigma = s;
 }
 void generador::dext(Event x, double t) {
@@ -51,7 +50,6 @@ Event generador::lambda(double t) {
 //where:
 //     %&Value% points to the variable which contains the value.
 //     %NroPort% is the port number (from 0 to n-1)
-
 return Event(&y, 0);
 }
 void generador::exit() {

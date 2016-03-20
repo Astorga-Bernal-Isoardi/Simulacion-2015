@@ -38,9 +38,9 @@ Coupled
                 }
             Parameters
                 {
-                l = Val; 2 ; Puerto de la Mesa 2.
-                deltal = Val; 0.5 ; Puerto de la Mesa 2.
-                vc = Val; 9 ; Puerto de la Mesa 2.
+                l = Val; 9 ; Longitud de la Cinta.
+                deltal = Val; 0.5 ; Longitud de los objetos de que viajan en la cinta.
+                vc = Val; 2 ; Velocidad a la cual se mueve la cinta.
                 }
             }
         Atomic
@@ -59,12 +59,12 @@ Coupled
                 }
             Parameters
                 {
-                l = Val; 2 ; Puerto de la Mesa 1.
-                deltal = Val; 0.5 ; Puerto de la Mesa 1.
-                vc = Val; 9 ; Puerto de la Mesa 1.
                 puerto_mesa1 = Val; 1 ; Puerto de la Mesa 1.
                 puerto_mesa2 = Val; 2 ; Puerto de la Mesa 2.
                 puerto_cinta = Val; 0 ; Puerto de la Cinta.
+                l = Val; 9 ; Longitud de la Cinta.
+                deltal = Val; 0.5 ; Longitud de los objetos de que viajan en la cinta.
+                vc = Val; 2 ; Velocidad a la cual se mueve la cinta.
                 }
             }
         Atomic
@@ -83,11 +83,11 @@ Coupled
                 }
             Parameters
                 {
-                tmov = Val; 2.5 ; Velocidad de los movimientos de la cinta.
+                tmov = Val; 0.001 ; Velocidad de los movimientos de la cinta.
                 puerto = Val; 1 ; Puerto asignado a la mesa movil.
-                l = Val; 2 ; Longitud de la Cinta.
+                l = Val; 9 ; Longitud de la Cinta.
                 deltal = Val; 0.5 ; Longitud de los objetos de que viajan en la cinta.
-                vc = Val; 9 ; Velocidad a la cual se mueve la cinta.
+                vc = Val; 2 ; Velocidad a la cual se mueve la cinta.
                 }
             }
         Atomic
@@ -108,9 +108,9 @@ Coupled
                 {
                 tmov = Val; 2.5 ; Velocidad de los movimientos de la cinta.
                 puerto = Val; 2 ; Puerto asignado a la mesa movil.
-                l = Val; 2 ; Longitud de la Cinta.
+                l = Val; 9 ; Longitud de la Cinta.
                 deltal = Val; 0.5 ; Longitud de los objetos de que viajan en la cinta.
-                vc = Val; 9 ; Velocidad a la cual se mueve la cinta.
+                vc = Val; 2 ; Velocidad a la cual se mueve la cinta.
                 }
             }
         Atomic
@@ -129,10 +129,10 @@ Coupled
                 }
             Parameters
                 {
-                lambda_distribucion = Val; 20 ; Parametro para la distribucion del generador
-                l = Val; 2 ; Longitud de la Cinta
+                lambda_distribucion = Val; 2.5 ; Parametro para la distribucion del generador
+                l = Val; 9 ; Longitud de la Cinta
                 deltal = Val; 0.5 ; Longitud de los objetos de que viajan en la cinta
-                vc = Val; 9 ; Velocidad a la cual se mueve la cinta
+                vc = Val; 2 ; Velocidad a la cual se mueve la cinta
                 }
             }
         Atomic
@@ -168,7 +168,7 @@ Coupled
             Description = Plot input signal using GnuPlot
             Graphic
                 {
-                Position = -7830 ; -3255
+                Position = -7905 ; -3330
                 Dimension = 1125 ; 1125
                 Direction = Right
                 Color = 15
@@ -222,17 +222,10 @@ Coupled
             }
         Line
             {
-            Source = Cmp ;  1 ;  1 ; 0
-            Sink = Cmp ;  2 ;  1 ; -1
-            PointX = -8775 ; -8775 ; -5565
-            PointY = -5475 ; -5475 ; -5475
-            }
-        Line
-            {
             Source = Cmp ;  1 ;  3 ; 0
             Sink = Cmp ;  7 ;  1 ; -1
-            PointX = -8775 ; -8400 ; -8400 ; -7965
-            PointY = -4800 ; -4800 ; -2700 ; -2700
+            PointX = -8775 ; -8400 ; -8400 ; -8040
+            PointY = -4800 ; -4800 ; -2775 ; -2775
             }
         Line
             {
@@ -247,6 +240,13 @@ Coupled
             Sink = Cmp ;  6 ;  1 ; -1
             PointX = -8775 ; -8175 ; -8175 ; -8040
             PointY = -5175 ; -5175 ; -4650 ; -4650
+            }
+        Line
+            {
+            Source = Cmp ;  1 ;  1 ; 0
+            Sink = Cmp ;  2 ;  1 ; -1
+            PointX = -8775 ; -8775 ; -5565
+            PointY = -5475 ; -5475 ; -5475
             }
         }
     }

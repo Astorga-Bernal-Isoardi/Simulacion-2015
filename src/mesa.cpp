@@ -1,3 +1,4 @@
+#include "stdarg.h"
 #include "string"
 using namespace std;
 
@@ -5,9 +6,9 @@ class Mesa
 {
 public:
 
-	string elevacion;
+	std::string elevacion;
 
-	string rotacion;
+	std::string rotacion;
 
 	bool disponible;
 	

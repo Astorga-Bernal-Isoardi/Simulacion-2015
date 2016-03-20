@@ -31,6 +31,8 @@ Salida salida;
 
 std::string y;
 
+std::string z;
+
 int x;
 
 // and parameters
@@ -46,6 +48,41 @@ int puerto_mesa1;
 int puerto_mesa2;
 
 int puerto_cinta;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -27,12 +27,31 @@ double deltal;
 
 double tmov;
 
-double puerto;
+int puerto;
 
 double vc;
 
-//Aux 
-double s;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

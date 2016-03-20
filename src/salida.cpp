@@ -1,3 +1,4 @@
+#include "stdarg.h"
 #include "string"
 using namespace std;
 
@@ -6,7 +7,7 @@ class Salida
 
 public:
 
-	string comando;
+	std::string comando;
 
 	int puerto;
 
@@ -20,7 +21,7 @@ public:
        return comando;
     }
     
-    void setComando( string _comando){
+    void setComando(std::string _comando){
         comando = _comando;
     }
     
